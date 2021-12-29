@@ -48,4 +48,5 @@ where place_country = "England";
 
 
 #9
-
+select instrument, count(perf_is) as count from performer group by instrument 
+having count = (select min(count) from (select instrument, count(perf_is) as count from performer group by instrument) a);
