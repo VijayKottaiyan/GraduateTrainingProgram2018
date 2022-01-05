@@ -64,3 +64,12 @@ where m_name = "Sue Little";
 select m_name, place_town from musician
 inner join place on musician.born_in = place.place_no
 where m_name != "James First" and place_no = (select born_in from musician where m_name = "James First");
+
+#12
+select m_name, count(distinct instrument) as instrument, count(distinct has_composed.cmpn_no) as composition from musician
+inner join place on musician.born_in = place.place_no
+inner join performer on musician.m_no = performer.perf_is
+inner join composer on  musician.m_no = composer.comp_is
+inner join has_composed on has_composed.cmpr_no = composer.comp_no
+where place_country = "England"
+group by m_name;
