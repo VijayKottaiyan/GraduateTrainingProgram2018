@@ -73,3 +73,11 @@ inner join composer on  musician.m_no = composer.comp_is
 inner join has_composed on has_composed.cmpr_no = composer.comp_no
 where place_country = "England"
 group by m_name;
+
+#13
+select distinct band_name, a.m_name as contact, b.m_name as conducted_by from band
+inner join musician a on band.band_contact = a.m_no
+inner join performance on band.band_no = performance.gave
+inner join musician b on performance.conducted_by = b.m_no
+inner join concert on concert.concert_no = performance.performed_in
+where concert_venue = "Royal Albert Hall";
