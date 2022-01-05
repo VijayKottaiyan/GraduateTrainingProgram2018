@@ -59,3 +59,8 @@ inner join has_composed on has_composed.cmpn_no = composition.c_no
 inner join composer on composer.comp_no = has_composed.cmpr_no
 inner join musician on musician.m_no = composer.comp_is
 where m_name = "Sue Little";
+
+#11
+select m_name, place_town from musician
+inner join place on musician.born_in = place.place_no
+where m_name != "James First" and place_no = (select born_in from musician where m_name = "James First");
