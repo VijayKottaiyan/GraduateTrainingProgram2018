@@ -50,3 +50,12 @@ where place_country = "England";
 #9
 select instrument, count(perf_is) as count from performer group by instrument 
 having count = (select min(count) from (select instrument, count(perf_is) as count from performer group by instrument) a);
+
+#10
+select band_name, c_title from band 
+inner join performance on band.band_no = performance.gave
+inner join composition on performance.performed = composition.c_no
+inner join has_composed on has_composed.cmpn_no = composition.c_no
+inner join composer on composer.comp_no = has_composed.cmpr_no
+inner join musician on musician.m_no = composer.comp_is
+where m_name = "Sue Little";
